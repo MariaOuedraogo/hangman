@@ -30,6 +30,30 @@
     </div>
   </div>
 
+  <script>
+    var track = document.getElementById('track');
+
+var controlBtn = document.getElementById('play-pause');
+
+function playPause() {
+    if (track.paused) {
+        track.play();
+        //controlBtn.textContent = "Pause";
+        controlBtn.className = "pause";
+    } else { 
+        track.pause();
+         //controlBtn.textContent = "Play";
+        controlBtn.className = "play";
+    }
+}
+
+controlBtn.addEventListener("click", playPause);
+track.addEventListener("ended", function() {
+  controlBtn.className = "play";
+});
+
+  </script>
+
   <script type="module">
 import { gsap } from "https://cdn.skypack.dev/gsap@3.11.4";
 import splitType from "https://cdn.skypack.dev/split-type@0.3.3";

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="./img/icon.png" type="image/png">
+  <link rel="stylesheet" href="./src/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THE HANGMAN.</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div id="loader">
+    <p class="load">the hangman.</p>
+  </div>
+
+  <div class="content">
+
+    <div id="root"></div>
+
+    <audio id="track">
+      <source src="sound/paradise.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="player-container">
+      <div id="play-pause" class="play">Play</div>
+    </div>
+  </div>
+
+  <script type="module">
+import { gsap } from "https://cdn.skypack.dev/gsap@3.11.4";
+import splitType from "https://cdn.skypack.dev/split-type@0.3.3";
+
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    gsap.to("#loader", {
+      opacity: 0, 
+      duration: 1, 
+      ease: "power4.out", 
+      onComplete: function() {
+        document.body.classList.add('loaded');
+
+        gsap.fromTo(".content", {
+          opacity: 0, 
+          y: 50 
+        }, {
+          opacity: 1, 
+          y: 0, 
+          duration: 1.5, 
+          ease: "power4.out" 
+        });
+      }
+    });
+  }, 2000); 
+});
+
+    const ourText = new splitType('p.load', { types: 'chars' })
+    const chars = ourText.chars
+
+    gsap.fromTo(
+      chars,
+      {
+        y: 100,
+        opacity: 0
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.03,
+        duration: 1,
+        ease: 'power4.out',
+      }
+    )
+</script>
+
+  <script src="music.js" defer></script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
